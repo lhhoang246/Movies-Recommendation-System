@@ -38,14 +38,15 @@ Phát triển ứng dụng web đơn giản giúp người dùng:
    ```
 
 ## 📚 Tài liệu đính kèm
-- `report_MI322_team9 1.docx`: Báo cáo chi tiết
-- `Nhom9_BTL_MI322 4.pptx`: Slide thuyết trình
+- `report_MI322_team9.docx`: Báo cáo chi tiết
+- `Nhom9_BTL_MI322.pptx`: Slide thuyết trình
 
 ## 👨‍💻 Nhóm thực hiện
 - Nhóm 9 – Môn MI322
-A45179 - Lê Huy Hoàng
-45512 - Nguyễn Khắc Lộc
-A41737 - Nguyễn Khôi Nguyên
+- Lê Huy Hoàng – A45179 
+- Nguyễn Khắc Lộc – A41737
+- Nguyễn Khôi Nguyên - A45512
+
 
 ---
 
