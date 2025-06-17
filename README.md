@@ -18,8 +18,8 @@ Phát triển ứng dụng web đơn giản giúp người dùng:
 | `static/css/` | Chứa file CSS cho giao diện |
 | `README.md` | Mô tả tổng quan về project |
 | `.gitignore` | Loại trừ các file không cần thiết khi push |
-| `report_MI322_team9 1.docx` | Báo cáo bài tập lớn |
-| `Nhom9_BTL_MI322 4.pptx` | Slide trình bày nhóm |
+| `report_MI322_team9.docx` | Báo cáo bài tập lớn |
+| `Nhom9_BTL_MI322.pptx` | Slide trình bày nhóm |
 
 ## 🚀 Hướng dẫn chạy
 1. **Cài thư viện cần thiết** (chạy trong terminal):
@@ -42,7 +42,10 @@ Phát triển ứng dụng web đơn giản giúp người dùng:
 - `Nhom9_BTL_MI322 4.pptx`: Slide thuyết trình
 
 ## 👨‍💻 Nhóm thực hiện
-- Nhóm 9 – Môn MI322, học kỳ ...
+- Nhóm 9 – Môn MI322
+A45179 - Lê Huy Hoàng
+45512 - Nguyễn Khắc Lộc
+A41737 - Nguyễn Khôi Nguyên
 
 ---
 
