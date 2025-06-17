@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>🎬 Hệ thống gợi ý phim</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>🎬 Hệ thống gợi ý phim</h1>
+
+    <form method="post" id="recommendForm">
+        <label><b>Chọn hệ thống:</b></label><br>
+        <input type="radio" name="method" value="rating" {% if method == 'rating' %}checked{% endif %}> Rating
+        <input type="radio" name="method" value="content" {% if method == 'content' %}checked{% endif %}> Nội dung<br><br>
+
+        <div id="rating_form" {% if method != 'rating' %}style="display:none;"{% endif %}>
+            <input type="radio" name="login_type" value="stt" checked> STT
+            <input type="radio" name="login_type" value="user_id"> User ID<br><br>
+            <input type="text" name="user_input" placeholder="Nhập STT hoặc User ID">
+            <input type="password" name="password" placeholder="Mật khẩu">
+            <input type="submit" value="Gợi ý">
+        </div>
+
+        <div id="content_form" {% if method != 'content' %}style="display:none;"{% endif %}>
+            <div style="position: relative;">
+                <input type="text" name="movie_title" id="movie_title" placeholder="Nhập tên phim" autocomplete="off">
+                <div id="suggestions"></div>
+            </div><br>
+        </div>
+    </form>
+
+    {% if error %}<p class="error">{{ error }}</p>{% endif %}
+    {% if user_id_display %}<h2>{{ user_id_display }}</h2>{% endif %}
+
+    {% if results %}
+        {% for title, score, poster in results %}
+            <div class="movie">
+                <img src="{{ poster }}" alt="poster">
+                <h3>{{ title }}</h3>
+                {% if method == 'rating' %}<p>Score: {{ score }}</p>{% endif %}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <script>
+        const movieInput = document.getElementById('movie_title');
+        const form = document.getElementById('recommendForm');
+        const suggestionsBox = document.getElementById('suggestions');
+
+        document.querySelectorAll('input[name="method"]').forEach(radio => {
+            radio.addEventListener('change', function () {
+                document.getElementById('rating_form').style.display = this.value === 'rating' ? 'block' : 'none';
+                document.getElementById('content_form').style.display = this.value === 'content' ? 'block' : 'none';
+            });
+        });
+
+        if (movieInput) {
+            movieInput.addEventListener('input', function () {
+                const query = this.value.toLowerCase();
+                suggestionsBox.innerHTML = "";
+
+                if (query.length > 0) {
+                    fetch("/autocomplete?q=" + encodeURIComponent(query))
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.length > 0) {
+                                data.forEach(title => {
+                                    const div = document.createElement('div');
+                                    div.textContent = title;
+                                    div.onclick = () => {
+                                        movieInput.value = title;
+                                        suggestionsBox.style.display = "none";
+                                        form.submit();
+                                    };
+                                    suggestionsBox.appendChild(div);
+                                });
+                                suggestionsBox.style.display = "block";
+                            } else {
+                                suggestionsBox.style.display = "none";
+                            }
+                        });
+                } else {
+                    suggestionsBox.style.display = "none";
+                }
+            });
+        }
+
+        document.addEventListener('click', function (e) {
+            if (!suggestionsBox.contains(e.target) && e.target !== movieInput) {
+                suggestionsBox.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
